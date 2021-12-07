@@ -22,12 +22,13 @@ async function getGif(res) {
   }
 }
 
-form.addEventListener('submit', async function (e) {
+function getInput(searchData) {
   e.preventDefault();
-  let searchData = search.value;
-  console.log(searchData.value);
+  searchData = search.value;
   searchData.value = '';
+}
 
+form.addEventListener('submit', getInput) {
   const response = await axios.get('http://api.giphy.com/v1/gifs/search', {
     params: {
       q: searchData,
@@ -35,7 +36,7 @@ form.addEventListener('submit', async function (e) {
     },
   });
   getGif(response.data);
-});
+};
 
 remove.addEventListener('click', function () {
   allGifs.remove();
