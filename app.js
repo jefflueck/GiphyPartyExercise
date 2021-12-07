@@ -22,13 +22,11 @@ async function getGif(res) {
   }
 }
 
-function getInput(searchData) {
+async function getInput(searchData) {
   e.preventDefault();
   searchData = search.value;
+  console.log(searchData);
   searchData.value = '';
-}
-
-form.addEventListener('submit', getInput) {
   const response = await axios.get('http://api.giphy.com/v1/gifs/search', {
     params: {
       q: searchData,
@@ -36,7 +34,19 @@ form.addEventListener('submit', getInput) {
     },
   });
   getGif(response.data);
-};
+}
+
+// returns form is null on submit, then a 404 after that error line
+form.addEventListener('submit', getInput());
+
+//   const response = await axios.get('http://api.giphy.com/v1/gifs/search', {
+//     params: {
+//       q: searchData,
+//       api_key: 'Oh7uqwMBe1nXRURtKKLYJY5o84kuanIL',
+//     },
+//   });
+//   getGif(response.data);
+// }
 
 remove.addEventListener('click', function () {
   allGifs.remove();
