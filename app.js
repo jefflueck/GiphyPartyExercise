@@ -11,7 +11,7 @@ async function getGif(res) {
   if (allResults) {
     let randomIndex = Math.floor(Math.random() * allResults);
     const newCol = document
-      .getElementsByTagName('DIV')
+      .getElementsByTagName('div')
       .addClassName('col-md-4');
     const newImg = document.createElement('IMG', {
       src: res.data[randomIndex].images.original.url,
@@ -24,9 +24,6 @@ async function getGif(res) {
 
 async function getInput(searchData) {
   e.preventDefault();
-  searchData = search.value;
-  console.log(searchData);
-  searchData.value = '';
   const response = await axios.get('http://api.giphy.com/v1/gifs/search', {
     params: {
       q: searchData,
@@ -37,7 +34,11 @@ async function getInput(searchData) {
 }
 
 // returns form is null on submit, then a 404 after that error line
-form.addEventListener('submit', getInput());
+form.addEventListener('submit', function () {
+  searchData = search.value;
+  console.log(searchData);
+  searchData.value = '';
+});
 
 //   const response = await axios.get('http://api.giphy.com/v1/gifs/search', {
 //     params: {
